@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/</link>
+    <description>Recent content in Tags on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 27 Dec 2019 11:14:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://cherubr.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JS for循环闭包问题</title>
+      <link>https://cherubr.github.io/tags/JS-for%E5%BE%AA%E7%8E%AF%E9%97%AD%E5%8C%85%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/JS-for%E5%BE%AA%E7%8E%AF%E9%97%AD%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>海康web3.0</title>
+      <link>https://cherubr.github.io/tags/%E6%B5%B7%E5%BA%B7web3.0/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/%E6%B5%B7%E5%BA%B7web3.0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>视频接口</title>
+      <link>https://cherubr.github.io/tags/%E8%A7%86%E9%A2%91%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/%E8%A7%86%E9%A2%91%E6%8E%A5%E5%8F%A3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx，mysql,redis环境配置</title>
+      <link>https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 26 Dec 2019 15:46:02 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jdk，maven 环境配置</title>
+      <link>https://cherubr.github.io/tags/jdkmaven-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 24 Dec 2019 20:47:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/jdkmaven-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maven仓库配置</title>
+      <link>https://cherubr.github.io/tags/maven%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 24 Dec 2019 20:47:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/maven%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://cherubr.github.io/tags/Java/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/Java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaBase</title>
+      <link>https://cherubr.github.io/tags/JavaBase/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/JavaBase/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jvm</title>
+      <link>https://cherubr.github.io/tags/jvm/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tags/jvm/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

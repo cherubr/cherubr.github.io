@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/post/</link>
+    <description>Recent content in Posts on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 27 Dec 2019 11:14:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://cherubr.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hk videos</title>
+      <link>https://cherubr.github.io/post/hugo/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/hugo/</guid>
+      <description>海康视屏web3.0控件的集成 测试demo的使用 集成开发 注意事项 1.测试demo 下载对应的web开发包hk-web3.0 安装对应的控件，直接</description>
+    </item>
+    
+    <item>
+      <title>Server-Docker 相关配置</title>
+      <link>https://cherubr.github.io/post/java/server/</link>
+      <pubDate>Thu, 26 Dec 2019 15:46:02 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/server/</guid>
+      <description>Docker相关服务配置 docker安装 mysql安装 redis安装 nginx安装 docker安装 移除现有的docker文件 yum remove docker \ docker-client \ docker-client-latest \</description>
+    </item>
+    
+    <item>
+      <title>DevEnviroment</title>
+      <link>https://cherubr.github.io/post/java/devEnviroment/</link>
+      <pubDate>Tue, 24 Dec 2019 20:47:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/devEnviroment/</guid>
+      <description>常见的java开发环境配置 jdk环境配置 maven环境配置 jdk环境配置 配置 JAVA_HOME 右键电脑找到属性&amp;ndash;&amp;gt;系统属性&amp;ndash;&amp;</description>
+    </item>
+    
+    <item>
+      <title>Helloworld</title>
+      <link>https://cherubr.github.io/post/helloworld/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/helloworld/</guid>
+      <description>hello world </description>
+    </item>
+    
+    <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/jvm/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvm/</guid>
+      <description>java 虚拟机 什么是JDK，JRE JDk与J2SE JDK版本J2SE与JAVA SE JAVA编译器 1.JDK与JRE区别与联系 简单来说JDK包含JRE</description>
+    </item>
+    
+  </channel>
+</rss>
