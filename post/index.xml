@@ -39,15 +39,6 @@
     </item>
     
     <item>
-      <title>Helloworld</title>
-      <link>https://cherubr.github.io/post/helloworld/</link>
-      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
-      
-      <guid>https://cherubr.github.io/post/helloworld/</guid>
-      <description>hello world </description>
-    </item>
-    
-    <item>
       <title>java 虚拟机</title>
       <link>https://cherubr.github.io/post/java/jvm/</link>
       <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
