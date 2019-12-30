@@ -6,10 +6,19 @@
     <description>Recent content in jvm on 朝花夕拾的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 22 Dec 2019 13:05:19 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 30 Dec 2019 22:31:34 +0800</lastBuildDate>
     
 	<atom:link href="https://cherubr.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JvmMemory</title>
+      <link>https://cherubr.github.io/post/java/jvmMemory/</link>
+      <pubDate>Mon, 30 Dec 2019 22:31:34 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvmMemory/</guid>
+      <description>jvm的内存结构 java堆 方法区 常量池 PC寄存器 java虚拟机栈 本地方法栈 公有部分（Java堆、方法区、常量池） java堆 1.jvm中分配一</description>
+    </item>
     
     <item>
       <title>java 虚拟机</title>
