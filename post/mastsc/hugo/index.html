@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Frc | 朝花夕拾的博客</title>
+    <meta property="og:title" content="Frc - 朝花夕拾的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-01-06T22:09:08&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-01-06T22:09:08&#43;08:00'>
+        
+    <meta name="Keywords" content="java,jvm,博客,spring,web3.0,海康视频插件,docker配置mysql,nginx,redis环境">
+    <meta name="description" content="Frc">
+        
+    <meta name="author" content="cherubr">
+    <meta property="og:url" content="https://cherubr.github.io/post/mastsc/hugo/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://cherubr.github.io/">
+                        朝花夕拾的博客
+                    </a>
+                
+                <p class="description">专注于Java、spring、移动互联网、项目管理、软件架构</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://cherubr.github.io/">首页</a>
+                    
+                    <a  href="https://cherubr.github.io/tools/" title="工具">工具</a>
+                    
+                    <a  href="https://cherubr.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://cherubr.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#frp-1">什么是frp？</a></li>
+    <li><a href="#frp-server">部署服务端的frp-server</a></li>
+    <li><a href="#frc-client">frc-client部署</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Frc</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年1月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://cherubr.github.io/categories/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2'>远程桌面</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h1 id="frp">基于frp的远程桌面使用</h1>
+<ul>
+<li>下载frp</li>
+<li>部署fps</li>
+<li>部署frc</li>
+</ul>
+<h2 id="frp-1">什么是frp？</h2>
+<p>frp是一种快速反向代理，可帮助您将NAT或防火墙后面的本地服务器公开到Internet。到目前为止，</p>
+<p>它支持TCP和UDP以及HTTP和HTTPS协议，在这些协议中，请求可以通过域名转发到内部服务。frp还具有P2P连接模式。</p>
+<p>下载地址<a href="https://github.com/fatedier/frp/releases">frp</a></p>
+<h2 id="frp-server">部署服务端的frp-server</h2>
+<ul>
+<li>这里你需要一个公有的ip（如阿里云服务器）</li>
+<li>解压之后你会看到如图</li>
+</ul>
+<p><img src="../../java/assert/frps.png" alt="frps123"></p>
+<ul>
+<li>配置frps.ini文件夹 我的配置如下，</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#000;font-weight:bold">[</span>common<span style="color:#000;font-weight:bold">]</span>
+<span style="color:#008080">bind_addr</span> <span style="color:#000;font-weight:bold">=</span> 0.0.0.0
+<span style="color:#008080">bind_port</span> <span style="color:#000;font-weight:bold">=</span> 7000
+
+<span style="color:#008080">dashboard_addr</span> <span style="color:#000;font-weight:bold">=</span> 0.0.0.0
+<span style="color:#008080">dashboard_port</span> <span style="color:#000;font-weight:bold">=</span> 7500
+
+<span style="color:#998;font-style:italic"># dashboard user and passwd for basic auth protect, if not set, both default value is admin</span>
+<span style="color:#008080">dashboard_user</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">test</span>
+<span style="color:#008080">dashboard_pwd</span> <span style="color:#000;font-weight:bold">=</span> testpasswd
+
+<span style="color:#998;font-style:italic"># dashboard assets directory(only for debug mode)</span>
+<span style="color:#998;font-style:italic"># assets_dir = ./static</span>
+<span style="color:#998;font-style:italic"># console or real logFile path like ./frps.log</span>
+<span style="color:#008080">log_file</span> <span style="color:#000;font-weight:bold">=</span> ./frps.log
+
+<span style="color:#998;font-style:italic"># trace, debug, info, warn, error</span>
+<span style="color:#008080">log_level</span> <span style="color:#000;font-weight:bold">=</span> info
+
+<span style="color:#998;font-style:italic"># auth token</span>
+<span style="color:#008080">token</span> <span style="color:#000;font-weight:bold">=</span> passwd
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>启动frps-server<br>
+dashboard这个对应的基本上都是网页访问frp Web网页配置</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">nohup ./frps -c ./frps.ini &gt; 2019-01-06.log 2&gt;&amp;<span style="color:#099">1</span> &amp;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>注意阿里云服务器对应的网络规则需要打开。如果服务器开启了防火墙则需要打开防火墙</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">firewall-cmd status  查看防火墙状态
+systemctl start firewall 开启
+systemctl stop firewalld 关闭
+firewall-cmd --permanent --zone<span style="color:#000;font-weight:bold">=</span>public --add-port<span style="color:#000;font-weight:bold">=</span>8888/tcp 添加相对应端口号
+firewall-cmd --reload 重新加载
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>访问ip+7500使用test，testpasswd登录访问，成功即部署成功</li>
+</ul>
+<h2 id="frc-client">frc-client部署</h2>
+<ul>
+<li>解压对应的系统的文件找到对应frpc.ini 配置文件</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#000;font-weight:bold">[</span>common<span style="color:#000;font-weight:bold">]</span>
+<span style="color:#998;font-style:italic">#配置的服务器ip地址（阿里云公网ip）</span>
+<span style="color:#008080">server_addr</span> <span style="color:#000;font-weight:bold">=</span> x.x.x.x
+<span style="color:#998;font-style:italic">#上面配置远程代理的端口号</span>
+<span style="color:#008080">server_port</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">7000</span> 
+<span style="color:#998;font-style:italic">#配置的密码</span>
+<span style="color:#008080">token</span> <span style="color:#000;font-weight:bold">=</span> passwd
+
+<span style="color:#000;font-weight:bold">[</span>home-rdp<span style="color:#000;font-weight:bold">]</span>
+<span style="color:#998;font-style:italic">#传输协议</span>
+<span style="color:#0086b3">type</span> <span style="color:#000;font-weight:bold">=</span> tcp
+<span style="color:#998;font-style:italic">#本地监听</span>
+<span style="color:#008080">local_ip</span> <span style="color:#000;font-weight:bold">=</span> 0.0.0.0
+<span style="color:#998;font-style:italic">#本地端口号</span>
+<span style="color:#008080">local_port</span> <span style="color:#000;font-weight:bold">=</span> 3389
+<span style="color:#998;font-style:italic">#远程连接访问的端口号</span>
+<span style="color:#008080">remote_port</span> <span style="color:#000;font-weight:bold">=</span> 7300
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>直接启动cmd下面运行</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./frpc -c ./frpc.ini
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>配置window-server启动</li>
+<li>下载winsw
+下载地址<a href="https://github.com/kohsuke/winsw/releases">winsw</a>
+下载编译之后的文件 如图<br>
+<img src="../../java/assert/winsw.png" alt="winsw"><br>
+解压之后将其放到frc当前的文件夹下面重命名为winsw.exe</li>
+<li>添加一个winsw.xml文件</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic">    Copyright (c) 2016 Oleg Nenashev and other contributors
+</span><span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic">    Permission is hereby granted, free of charge, to any person obtaining a copy of this 
+</span><span style="color:#998;font-style:italic">    software and associated documentation files (the &#34;Software&#34;), to deal in the Software without
+</span><span style="color:#998;font-style:italic">    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+</span><span style="color:#998;font-style:italic">    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+</span><span style="color:#998;font-style:italic">    Software is furnished to do so, subject to the following conditions:
+</span><span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic">    The above copyright notice and this permission notice shall be included in all copies or 
+</span><span style="color:#998;font-style:italic">    substantial portions of the Software.
+</span><span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic">    THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
+</span><span style="color:#998;font-style:italic">    BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+</span><span style="color:#998;font-style:italic">    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+</span><span style="color:#998;font-style:italic">    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+</span><span style="color:#998;font-style:italic">    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">--&gt;</span>
+
+<span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic"> This is an example of a minimal Windows Service Wrapper configuration, which includes only mandatiory options.
+</span><span style="color:#998;font-style:italic"> 
+</span><span style="color:#998;font-style:italic"> This configuration file should be placed near the WinSW executable, the name should be the same.
+</span><span style="color:#998;font-style:italic"> E.g. for myapp.exe the configuration file name should be myapp.xml
+</span><span style="color:#998;font-style:italic"> 
+</span><span style="color:#998;font-style:italic"> You can find more information about the configuration options here: https://github.com/kohsuke/winsw/blob/master/doc/xmlConfigFile.md
+</span><span style="color:#998;font-style:italic"> Full example: https://github.com/kohsuke/winsw/blob/sample</span><span style="color:#998;font-style:italic">-</span><span style="color:#998;font-style:italic">config</span><span style="color:#998;font-style:italic">-</span><span style="color:#998;font-style:italic">file/examples/allOptions.xml
+</span><span style="color:#998;font-style:italic"></span><span style="color:#998;font-style:italic">--&gt;</span>
+<span style="color:#000080">&lt;configuration</span><span style="color:#000080">&gt;</span>
+  
+  <span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic"> ID of the service. It should be unique accross the Windows system</span><span style="color:#998;font-style:italic">--&gt;</span>
+  <span style="color:#000080">&lt;id</span><span style="color:#000080">&gt;</span>frpc<span style="color:#000080">&lt;/id&gt;</span>
+  <span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic"> Display name of the service </span><span style="color:#998;font-style:italic">--&gt;</span>
+  <span style="color:#000080">&lt;name</span><span style="color:#000080">&gt;</span>Frpc Service (powered by WinSW)<span style="color:#000080">&lt;/name&gt;</span>
+  <span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic"> Service description </span><span style="color:#998;font-style:italic">--&gt;</span>
+  <span style="color:#000080">&lt;description</span><span style="color:#000080">&gt;</span>This frpc service can realize reverse Proxy<span style="color:#000080">&lt;/description&gt;</span>
+  <span style="color:#998;font-style:italic">&lt;!--</span><span style="color:#998;font-style:italic"> Path to the executable, which should be started </span><span style="color:#998;font-style:italic">--&gt;</span>
+  <span style="color:#000080">&lt;executable</span><span style="color:#000080">&gt;</span>frpc<span style="color:#000080">&lt;/executable&gt;</span>
+  <span style="color:#000080">&lt;arguments</span><span style="color:#000080">&gt;</span>-c frpc.ini<span style="color:#000080">&lt;/arguments&gt;</span>
+  <span style="color:#000080">&lt;logmode</span><span style="color:#000080">&gt;</span>reset<span style="color:#000080">&lt;/logmode&gt;</span>
+
+<span style="color:#000080">&lt;/configuration&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>启动命令</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">winsw install
+winsw start
+<span style="color:#998;font-style:italic">#或者</span>
+.<span style="color:#d14">\w</span>insw install
+.<span style="color:#d14">\w</span>insw start
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>远程访问计算机</li>
+</ul>
+<p>名称：变成了公有服务器ip端口号</p>
+<p>用户名：计算机名称</p>
+<p>密码： 计算机登录密码</p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://cherubr.github.io/">cherubr</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://cherubr.github.io/post/mastsc/hugo/">https://cherubr.github.io/post/mastsc/hugo/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/java/jvmMemory/">JvmMemory</a></li>
+        
+        <li><a href="/post/hugo/">Hk videos</a></li>
+        
+        <li><a href="/post/java/server/">Server-Docker 相关配置</a></li>
+        
+        <li><a href="/post/java/devEnviroment/">DevEnviroment</a></li>
+        
+        <li><a href="/tools/">Tool</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://cherubr.github.io/tags/frp'>frp</a></li>
+                
+                <li><a href='https://cherubr.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E9%85%8D%E7%BD%AEfrp'>阿里云配置frp</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "cherubr/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://cherubr.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://cherubr.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://cherubr.github.io/post/mastsc/hugo/" title="Frc">Frc</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/jvmMemory/" title="JvmMemory">JvmMemory</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/hugo/" title="Hk videos">Hk videos</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/server/" title="Server-Docker 相关配置">Server-Docker 相关配置</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/devEnviroment/" title="DevEnviroment">DevEnviroment</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/jvm/" title="java 虚拟机">java 虚拟机</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://cherubr.github.io/categories/Docker/">Docker (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/Environment/">Environment (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/JS-Web-Interface/">JS Web Interface (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/JavaBase/">JavaBase (2)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/">远程桌面 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://cherubr.github.io/tags/JS-for%E5%BE%AA%E7%8E%AF%E9%97%AD%E5%8C%85%E9%97%AE%E9%A2%98/">JS for循环闭包问题</a>
+    
+    <a href="https://cherubr.github.io/tags/Java/">Java</a>
+    
+    <a href="https://cherubr.github.io/tags/JavaBase/">JavaBase</a>
+    
+    <a href="https://cherubr.github.io/tags/frp/">frp</a>
+    
+    <a href="https://cherubr.github.io/tags/jdkmaven-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">jdk，maven 环境配置</a>
+    
+    <a href="https://cherubr.github.io/tags/jvm/">jvm</a>
+    
+    <a href="https://cherubr.github.io/tags/maven%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE/">maven仓库配置</a>
+    
+    <a href="https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">nginx，mysql,redis环境配置</a>
+    
+    <a href="https://cherubr.github.io/tags/%E6%B5%B7%E5%BA%B7web3.0/">海康web3.0</a>
+    
+    <a href="https://cherubr.github.io/tags/%E8%A7%86%E9%A2%91%E6%8E%A5%E5%8F%A3/">视频接口</a>
+    
+    <a href="https://cherubr.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E9%85%8D%E7%BD%AEfrp/">阿里云配置frp</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/cherubr/" title="朝花夕拾的Github">朝花夕拾的Github</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://book.douban.com/subject/2130190/" title="Java权威指南">Java编程思想</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://91mjw.com/" title="消遣时间">我的最爱(美剧)</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://cherubr.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://cherubr.github.io/">朝花夕拾的博客 By cherubr</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>
