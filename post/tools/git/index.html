@@ -152,7 +152,16 @@
         <li><a href="#14-子模块问题">1.4 子模块问题</a></li>
       </ul>
     </li>
-    <li><a href="#2-merge和rebase">2. merge和rebase</a></li>
+    <li><a href="#2-git命令使用">2. git命令使用</a>
+      <ul>
+        <li><a href="#21-设着邮箱和用户名">2.1 设着邮箱和用户名</a></li>
+        <li><a href="#22-git存储区域提交和回退">2.2 git存储区域提交和回退</a></li>
+        <li><a href="#23-git标签">2.3 git标签</a></li>
+        <li><a href="#24-登录问题">2.4 登录问题</a></li>
+        <li><a href="#25-git-mergegit-rebase-命令区别">2.5 git merge|git rebase 命令区别</a></li>
+        <li><a href="#26-删除分支命令">2.6 删除分支命令</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -214,7 +223,7 @@
             <h1 id="git">Git</h1>
 <ul>
 <li>什么是git子模块（Submodule）子模块</li>
-<li>merge | rebase</li>
+<li>git命令</li>
 </ul>
 <h2 id="1-什么是git子模块">1. 什么是git子模块</h2>
 <ul>
@@ -297,8 +306,192 @@
  忘记也没有关系，这里切换到子模块对应目录，你刚才生成的分支依然存在,
  执行: git checkout ${branch.name}
  返回主目录重新进行meger和rebase操作。
-</code></pre><h2 id="2-merge和rebase">2. merge和rebase</h2>
+</code></pre><h2 id="2-git命令使用">2. git命令使用</h2>
+<h3 id="21-设着邮箱和用户名">2.1 设着邮箱和用户名</h3>
+<ul>
+<li>global代表全局，不加global代表当前项目</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global user.name <span style="color:#d14">&#34;Your name&#34;</span>
+</span></span><span style="display:flex;"><span>git config --global user.email <span style="color:#d14">&#34;email@example.com&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="22-git存储区域提交和回退">2.2 git存储区域提交和回退</h3>
+<p>工作区：对应的目录<br>
+版本库：.git<br>
+版本库分为：暂存区和分支，添加到暂存区的数据要提交到分支中才能最终提交到git<br>
+git相关命令：工作区内-&gt;暂存区-&gt;分支<br>
+git add filename：添加文件到暂存区<br>
+git commit -m &ldquo;info&rdquo; 提交更改分支<br>
+git status： 查看仓库的当前状态<br>
+git diff:  比较的是工作区和暂存区的差别<br>
+git diff &ndash;cached 比较的是暂存区和版本库的差别<br>
+git diff HEAD 可以查看工作区和版本库的差别<br>
+git log：查看历史记录<br>
+git log &ndash;pretty=oneline 以id查看历史记录<br>
+git reflog 记录每次命令<br>
+git checkout &ndash;file 文件没有经过添加到暂存区的恢复<br>
+git reset HEAD file 可以将暂存区的文件修改撤销  再通过checkout 回退到版本库  <br>
+git reset &ndash;hard HEAD^或者直接通过id（&ndash;hard 3628164）  版本回退 git reset<br>
+git fetch ${branch.name} &amp;&amp; git merge ${branch.name}/${local.branch.name} 合并远程分支数据到本地分支</p>
+<h3 id="23-git标签">2.3 git标签</h3>
+<p>git tag ${name} 打标签<br>
+git tag ${tag.name} ${commit.id} 给某个版本打标签<br>
+git tag 查看标签<br>
+git show ${tag.name}查看标签信息<br>
+git tag -a ${tag.name} -m ${tag.info}<br>
+git tag -d ${tag.name} 删除标签<br>
+git push origin ${tag.name} 推送标签到远程仓库<br>
+删除远程标签先删除本地
+git tag -d ${tag.name}<br>
+git push origin :refs/tags/${tag.name}</p>
+<h3 id="24-登录问题">2.4 登录问题</h3>
+<p>避免每次push需要登录问题
+打开git bash控制终端后：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#0086b3">cd</span> ~  
+</span></span><span style="display:flex;"><span>vi .gitconfig  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在文件中加上如下：<br>
+[credential]
+helper = store –file .git-credentials</p>
+<h3 id="25-git-mergegit-rebase-命令区别">2.5 git merge|git rebase 命令区别</h3>
+<ul>
+<li>两者都是用来合并分支命令。下面以图列来分析rebase和merge区别</li>
+<li>这是一个开发任务分叉到两个不同分支
 
+        <img class="mx-auto" alt="befor_merge" src="../assert/befor_merge.png" />   
+    </li>
+<li>整合分支最容易的方法是 merge 命令。 它会把两个分支的最新快照（C3 和 C4）以及二者最近的共同祖先（C2）进行三方合并，
+合并的结果是生成一个新的快照（并提交）<br>
+
+        <img class="mx-auto" alt="after_merge" src="../assert/after_merge-merge.png" />   
+    </li>
+</ul>
+<h4 id="251-下面介绍rebase使用">2.5.1 下面介绍rebase使用</h4>
+<ul>
+<li>你可以提取在 C4 中引入的补丁和修改，然后在 C3 的基础上应用一次。
+即使用 rebase 命令将提交到某一分支上的所有修改都移至另一分支上，就好像“重新播放”一样。</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout experiment
+</span></span><span style="display:flex;"><span>$ git rebase master
+</span></span><span style="display:flex;"><span>First, rewinding head to replay your work on top of it...
+</span></span><span style="display:flex;"><span>Applying: added staged <span style="color:#0086b3">command</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>它的原理是首先找到这两个分支（即当前分支 experiment、rebase操作的目标基底分支 master） 的最近共同祖先 C2，
+然后对比当前分支相对于该祖先的历次提交，提取相应的修改并存为临时文件， 然后将当前分支指向目标基底 C3, 
+最后以此将之前另存为临时文件的修改依序应用。 
+
+        <img class="mx-auto" alt="merge-rebase" src="../assert/merge-rebase.png" />   
+    </li>
+<li>将 C4 中的修改变基到 C3 上 ,现在回到 master 分支，进行一次快进合并</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout master
+</span></span><span style="display:flex;"><span>$ git merge experiment
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+        <img class="mx-auto" alt="merge-rebase-after" src="../assert/merge-rebase-after.png" />   
+    </p>
+<ul>
+<li>rebase想对merge而言提交的日志记录比较整洁。</li>
+</ul>
+<h4 id="252-有趣的rebase操作">2.5.2 有趣的rebase操作</h4>
+<ul>
+<li>想象一下现在你有这样的一个工作分支情形
+
+        <img class="mx-auto" alt="interesting-rebase" src="../assert/interesting-rebase.png" />   
+    </li>
+<li>现在你不想合并server分支上的工作内容，但是想把client（即 C8 和 C9）分支合并到master分支。</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase --onto master server client
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>取出 client 分支，找出它从 server 分支分歧之后的补丁， 然后把这些补丁在 master 分支上重放一遍
+让 client 看起来像直接基于 master 修改一样”。这理解起来有一点复杂，不过效果非常酷。</li>
+<li>再合并分支</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout master
+</span></span><span style="display:flex;"><span>$ git merge client
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="254-直接合并rebase">2.5.4 直接合并rebase</h4>
+<ul>
+<li>使用 git rebase <!-- raw HTML omitted --> <!-- raw HTML omitted --> 命令可以直接将主题分支 （即本例中的 server）变基到目标分支（即 master）上。 
+这样做能省去你先切换到 server 分支，再对其执行变基命令的多个步骤。</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git rebase master server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>该命令会切换到server分支，之后需要切换到master分支进行合并</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout master
+</span></span><span style="display:flex;"><span>$ git merge server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="26-删除分支命令">2.6 删除分支命令</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git branch -d client
+</span></span><span style="display:flex;"><span>$ git branch -d server
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
         </div>
 
         
