@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx，mysql,redis环境配置 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+    <description>Recent content in nginx，mysql,redis环境配置 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 26 Dec 2019 15:46:02 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Server-Docker 相关配置</title>
+      <link>https://cherubr.github.io/post/docker/server-install/</link>
+      <pubDate>Thu, 26 Dec 2019 15:46:02 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/docker/server-install/</guid>
+      <description>Docker相关服务配置 docker安装 mysql安装 redis安装 nginx安装 rabbitmq安装 docker安装 移除现有的docker</description>
+    </item>
+    
+  </channel>
+</rss>

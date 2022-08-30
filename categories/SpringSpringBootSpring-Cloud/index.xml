@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring,SpringBoot,Spring Cloud on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/categories/SpringSpringBootSpring-Cloud/</link>
+    <description>Recent content in Spring,SpringBoot,Spring Cloud on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 06 Mar 2020 22:09:08 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/SpringSpringBootSpring-Cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>spring 生命周期</title>
+      <link>https://cherubr.github.io/post/frame/hugo/</link>
+      <pubDate>Fri, 06 Mar 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/frame/hugo/</guid>
+      <description>Spring 生命周期 实例化Bean 设置对象属性(依赖注入) 实现&amp;hellip;Aware接口 实现BeanPostProcessor接口 Initiali</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>“RabbitMq 基础学习 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/RabbitMq-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in “RabbitMq 基础学习 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 06 Jun 2020 22:09:08 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/RabbitMq-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RabbitMq</title>
+      <link>https://cherubr.github.io/post/storage/hugo/</link>
+      <pubDate>Sat, 06 Jun 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/storage/hugo/</guid>
+      <description>RabbitMq 学习资料 什么是Virtual host 用户信息和权限 什么是（channel）管道 什么是交换机(exchange) 什么是Virtual host - 中文含义虚</description>
+    </item>
+    
+  </channel>
+</rss>

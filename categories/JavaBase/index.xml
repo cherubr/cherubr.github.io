@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JavaBase on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/categories/JavaBase/</link>
+    <description>Recent content in JavaBase on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 30 Dec 2019 22:31:34 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/JavaBase/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JvmMemory</title>
+      <link>https://cherubr.github.io/post/java/jvmMemory/</link>
+      <pubDate>Mon, 30 Dec 2019 22:31:34 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvmMemory/</guid>
+      <description>jvm的内存结构 java堆 方法区 常量池 PC寄存器 java虚拟机栈 本地方法栈 公有部分（Java堆、方法区、常量池） java堆 1.jvm中分配一</description>
+    </item>
+    
+    <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/jvm/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvm/</guid>
+      <description>java 虚拟机 什么是JDK，JRE JDk与J2SE JDK版本J2SE与JAVA SE JAVA编译器 1.JDK与JRE区别与联系 简单来说JDK包含JRE</description>
+    </item>
+    
+  </channel>
+</rss>

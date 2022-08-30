@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JS Web Interface on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/categories/JS-Web-Interface/</link>
+    <description>Recent content in JS Web Interface on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 27 Dec 2019 11:14:50 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/JS-Web-Interface/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hk videos</title>
+      <link>https://cherubr.github.io/post/sdk/hugo/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/sdk/hugo/</guid>
+      <description>海康视频web3.0控件的集成 测试demo的使用 集成开发 注意事项 1.测试demo 1.1下载对应的web开发包hk-web3.0 1.2安装对应</description>
+    </item>
+    
+  </channel>
+</rss>

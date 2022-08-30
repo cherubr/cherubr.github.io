@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>frp on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/frp/</link>
+    <description>Recent content in frp on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 06 Jan 2020 22:09:08 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/frp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Frc</title>
+      <link>https://cherubr.github.io/post/mastsc/hugo/</link>
+      <pubDate>Mon, 06 Jan 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/mastsc/hugo/</guid>
+      <description>基于frp的远程桌面使用 下载frp 部署fps 部署frc 什么是frp？ frp是一种快速反向代理，可帮助您将NAT或防火墙后面的本地服务器公开到</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git 子模块 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/Git-%E5%AD%90%E6%A8%A1%E5%9D%97/</link>
+    <description>Recent content in Git 子模块 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 29 Aug 2022 16:34:52 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/Git-%E5%AD%90%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>https://cherubr.github.io/post/tools/git/</link>
+      <pubDate>Mon, 29 Aug 2022 16:34:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/git/</guid>
+      <description>Git 什么是git子模块（Submodule）子模块 merge | rebase 1. 什么是git子模块 子模块允许您将 Git 存储库保留为另一个 Git 存储库的子目录。 这使您可以将另</description>
+    </item>
+    
+  </channel>
+</rss>

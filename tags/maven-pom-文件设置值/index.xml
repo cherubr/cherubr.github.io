@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>maven pom 文件设置值 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/maven-pom-%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%80%BC/</link>
+    <description>Recent content in maven pom 文件设置值 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 06 May 2020 22:09:08 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/maven-pom-%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%80%BC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Maven</title>
+      <link>https://cherubr.github.io/post/tools/hugo/</link>
+      <pubDate>Wed, 06 May 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/hugo/</guid>
+      <description>Maven知识梳理 介绍 依赖管理加载jar的流程 常用的setting.xml,pom文件配置和使用 maven的构建 什么是Maven？ Maven</description>
+    </item>
+    
+  </channel>
+</rss>

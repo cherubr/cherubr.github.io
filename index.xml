@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/</link>
+    <description>Recent content on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 29 Aug 2022 16:34:52 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>https://cherubr.github.io/post/tools/git/</link>
+      <pubDate>Mon, 29 Aug 2022 16:34:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/git/</guid>
+      <description>Git 什么是git子模块（Submodule）子模块 merge | rebase 1. 什么是git子模块 子模块允许您将 Git 存储库保留为另一个 Git 存储库的子目录。 这使您可以将另</description>
+    </item>
+    
+    <item>
+      <title>Atom</title>
+      <link>https://cherubr.github.io/post/tools/hugo/</link>
+      <pubDate>Sun, 28 Aug 2022 14:18:23 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/hugo/</guid>
+      <description>Atom 文件编辑器 什么是Hugo Hugo安装 Hugo常用命令 1.什么是Hugo Hugo 是最受欢迎的开源静态站点生成器之一。凭借惊人的速度和灵活性，Hug</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://cherubr.github.io/about/</link>
+      <pubDate>Fri, 04 Jun 2021 22:20:26 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/about/</guid>
+      <description>个人信息 本科/安徽工业大学计算机系 专业: 软件工程 工作年限：4年 技术博客：https://cherubr.github.io/ 期望城市：杭州 联</description>
+    </item>
+    
+    <item>
+      <title>RabbitMq</title>
+      <link>https://cherubr.github.io/post/storage/hugo/</link>
+      <pubDate>Sat, 06 Jun 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/storage/hugo/</guid>
+      <description>RabbitMq 学习资料 什么是Virtual host 用户信息和权限 什么是（channel）管道 什么是交换机(exchange) 什么是Virtual host - 中文含义虚</description>
+    </item>
+    
+    <item>
+      <title>Maven</title>
+      <link>https://cherubr.github.io/post/tools/hugo/</link>
+      <pubDate>Wed, 06 May 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/hugo/</guid>
+      <description>Maven知识梳理 介绍 依赖管理加载jar的流程 常用的setting.xml,pom文件配置和使用 maven的构建 什么是Maven？ Maven</description>
+    </item>
+    
+    <item>
+      <title>spring 生命周期</title>
+      <link>https://cherubr.github.io/post/frame/hugo/</link>
+      <pubDate>Fri, 06 Mar 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/frame/hugo/</guid>
+      <description>Spring 生命周期 实例化Bean 设置对象属性(依赖注入) 实现&amp;hellip;Aware接口 实现BeanPostProcessor接口 Initiali</description>
+    </item>
+    
+    <item>
+      <title>Ftp</title>
+      <link>https://cherubr.github.io/post/file/hugo/</link>
+      <pubDate>Wed, 22 Jan 2020 01:28:24 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/file/hugo/</guid>
+      <description>ftp服务器 什么是ftp服务器 ftp的两种通信方式 java实现ftp服务器实现文件传和下载。 1.什么是ftp服务器 ftp(file transfer protocol,文件</description>
+    </item>
+    
+    <item>
+      <title>Frc</title>
+      <link>https://cherubr.github.io/post/mastsc/hugo/</link>
+      <pubDate>Mon, 06 Jan 2020 22:09:08 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/mastsc/hugo/</guid>
+      <description>基于frp的远程桌面使用 下载frp 部署fps 部署frc 什么是frp？ frp是一种快速反向代理，可帮助您将NAT或防火墙后面的本地服务器公开到</description>
+    </item>
+    
+    <item>
+      <title>JvmMemory</title>
+      <link>https://cherubr.github.io/post/java/jvmMemory/</link>
+      <pubDate>Mon, 30 Dec 2019 22:31:34 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvmMemory/</guid>
+      <description>jvm的内存结构 java堆 方法区 常量池 PC寄存器 java虚拟机栈 本地方法栈 公有部分（Java堆、方法区、常量池） java堆 1.jvm中分配一</description>
+    </item>
+    
+    <item>
+      <title>Hk videos</title>
+      <link>https://cherubr.github.io/post/sdk/hugo/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:50 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/sdk/hugo/</guid>
+      <description>海康视频web3.0控件的集成 测试demo的使用 集成开发 注意事项 1.测试demo 1.1下载对应的web开发包hk-web3.0 1.2安装对应</description>
+    </item>
+    
+    <item>
+      <title>Server-Docker 相关配置</title>
+      <link>https://cherubr.github.io/post/docker/server-install/</link>
+      <pubDate>Thu, 26 Dec 2019 15:46:02 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/docker/server-install/</guid>
+      <description>Docker相关服务配置 docker安装 mysql安装 redis安装 nginx安装 rabbitmq安装 docker安装 移除现有的docker</description>
+    </item>
+    
+    <item>
+      <title>DevEnviroment</title>
+      <link>https://cherubr.github.io/post/tools/devEnviroment/</link>
+      <pubDate>Tue, 24 Dec 2019 20:47:52 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/devEnviroment/</guid>
+      <description>常见的java开发环境配置 jdk环境配置 maven环境配置 jdk环境配置 配置 JAVA_HOME 右键电脑找到属性&amp;ndash;&amp;gt;系统属性&amp;ndash;&amp;</description>
+    </item>
+    
+    <item>
+      <title>Tool</title>
+      <link>https://cherubr.github.io/tools/</link>
+      <pubDate>Mon, 23 Dec 2019 22:25:15 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/tools/</guid>
+      <description>idea 注册码: ifdll Sumatra PDF pdf工具</description>
+    </item>
+    
+    <item>
+      <title>Archives</title>
+      <link>https://cherubr.github.io/archives/</link>
+      <pubDate>Sun, 22 Dec 2019 14:37:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/jvm/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvm/</guid>
+      <description>java 虚拟机 什么是JDK，JRE JDk与J2SE JDK版本J2SE与JAVA SE JAVA编译器 1.JDK与JRE区别与联系 简单来说JDK包含JRE</description>
+    </item>
+    
+    <item>
+      <title>search</title>
+      <link>https://cherubr.github.io/search/</link>
+      <pubDate>Sun, 22 Dec 2019 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
