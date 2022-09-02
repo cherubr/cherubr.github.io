@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jvm指令集 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/jvm%E6%8C%87%E4%BB%A4%E9%9B%86/</link>
+    <description>Recent content in jvm指令集 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 02 Sep 2021 16:46:34 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/jvm%E6%8C%87%E4%BB%A4%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jvmcommandlist</title>
+      <link>https://cherubr.github.io/post/java/jvmcommandlist/</link>
+      <pubDate>Thu, 02 Sep 2021 16:46:34 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvmcommandlist/</guid>
+      <description>javap -c 对代码进行反汇编 指令码 助记符 说明 0x00 nop 无操作 0x01 aconst_null 将null推送至栈顶 0x02 iconst_m1 将int型-1推送至栈顶 0x03 iconst_0 将int型0推送至栈顶 0x04 iconst_1 将int型1</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,7 +3,25 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cherubr.github.io/categories/</loc>
-    <lastmod>2022-08-29T16:34:52+08:00</lastmod>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/post/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/tags/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/post/tools/uml/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/tags/Uml%E5%BB%BA%E6%A8%A1%E7%B1%BB%E5%9B%BE/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</loc>
+    <lastmod>2022-09-02T10:09:53+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/post/tools/git/</loc>
     <lastmod>2022-08-29T16:34:52+08:00</lastmod>
@@ -15,15 +33,6 @@
     <lastmod>2022-08-29T16:34:52+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/tags/Git%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2022-08-29T16:34:52+08:00</lastmod>
-  </url><url>
-    <loc>https://cherubr.github.io/post/</loc>
-    <lastmod>2022-08-29T16:34:52+08:00</lastmod>
-  </url><url>
-    <loc>https://cherubr.github.io/tags/</loc>
-    <lastmod>2022-08-29T16:34:52+08:00</lastmod>
-  </url><url>
-    <loc>https://cherubr.github.io/</loc>
     <lastmod>2022-08-29T16:34:52+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/</loc>
@@ -43,6 +52,15 @@
   </url><url>
     <loc>https://cherubr.github.io/categories/Tools-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2022-08-28T14:18:23+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/categories/JavaBase/</loc>
+    <lastmod>2021-09-02T16:46:34+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/post/java/jvmcommandlist/</loc>
+    <lastmod>2021-09-02T16:46:34+08:00</lastmod>
+  </url><url>
+    <loc>https://cherubr.github.io/tags/jvm%E6%8C%87%E4%BB%A4%E9%9B%86/</loc>
+    <lastmod>2021-09-02T16:46:34+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/about/</loc>
     <lastmod>2021-06-04T22:20:26+08:00</lastmod>
@@ -123,9 +141,6 @@
     <lastmod>2020-01-06T22:09:08+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/tags/JavaBase/</loc>
-    <lastmod>2019-12-30T22:31:34+08:00</lastmod>
-  </url><url>
-    <loc>https://cherubr.github.io/categories/JavaBase/</loc>
     <lastmod>2019-12-30T22:31:34+08:00</lastmod>
   </url><url>
     <loc>https://cherubr.github.io/tags/Java%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</loc>
