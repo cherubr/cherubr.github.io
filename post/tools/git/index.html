@@ -358,6 +358,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="22-git存储区域提交和回退">2.2 git存储区域提交和回退</h3>
+<blockquote>
 <p>工作区：对应的目录<br>
 版本库：.git<br>
 版本库分为：暂存区和分支，添加到暂存区的数据要提交到分支中才能最终提交到git<br>
@@ -375,7 +376,9 @@ git checkout &ndash;file 文件没有经过添加到暂存区的恢复<br>
 git reset HEAD file 可以将暂存区的文件修改撤销  再通过checkout 回退到版本库  <br>
 git reset &ndash;hard HEAD^或者直接通过id（&ndash;hard 3628164）  版本回退 git reset<br>
 git fetch ${branch.name} &amp;&amp; git merge ${branch.name}/${local.branch.name} 合并远程分支数据到本地分支</p>
+</blockquote>
 <h3 id="23-git标签">2.3 git标签</h3>
+<blockquote>
 <p>git tag ${name} 打标签<br>
 git tag ${tag.name} ${commit.id} 给某个版本打标签<br>
 git tag 查看标签<br>
@@ -386,6 +389,7 @@ git push origin ${tag.name} 推送标签到远程仓库<br>
 删除远程标签先删除本地
 git tag -d ${tag.name}<br>
 git push origin :refs/tags/${tag.name}</p>
+</blockquote>
 <h3 id="24-登录问题">2.4 登录问题</h3>
 <p>避免每次push需要登录问题
 打开git bash控制终端后：</p>
