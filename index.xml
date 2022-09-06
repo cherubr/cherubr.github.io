@@ -6,7 +6,16 @@
     <description>Recent content on 朝花夕拾的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 29 Aug 2022 16:34:52 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 10:09:53 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uml</title>
+      <link>https://cherubr.github.io/post/tools/uml/</link>
+      <pubDate>Fri, 02 Sep 2022 10:09:53 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/uml/</guid>
+      <description>UML 软件工程领域中的一种通用、开发性建模语言，旨在提供一种可视化系统设计的标准方法 建模（Modeling） 类图 建模 区分 UML 模型和系统图集是很重要</description>
+    </item>
+    
     <item>
       <title>Git</title>
       <link>https://cherubr.github.io/post/tools/git/</link>
@@ -23,6 +32,24 @@
       
       <guid>https://cherubr.github.io/post/tools/hugo/</guid>
       <description>Atom 文件编辑器 什么是Hugo Hugo安装 Hugo常用命令 1.什么是Hugo Hugo 是最受欢迎的开源静态站点生成器之一。凭借惊人的速度和灵活性，Hug</description>
+    </item>
+    
+    <item>
+      <title>SPI组件</title>
+      <link>https://cherubr.github.io/post/java/spi/</link>
+      <pubDate>Mon, 06 Sep 2021 13:43:18 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/spi/</guid>
+      <description>Java 服务提供者接口 什么是java Spi SPI组件构成 API和SPI区别 SPI实战演练 什么是java Spi SPI: 用于发现和加载与给定接口匹配的实现。服务提供</description>
+    </item>
+    
+    <item>
+      <title>Jvmcommandlist</title>
+      <link>https://cherubr.github.io/post/java/jvmcommandlist/</link>
+      <pubDate>Thu, 02 Sep 2021 16:46:34 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/jvmcommandlist/</guid>
+      <description>javap -c 对代码进行反汇编 指令码 助记符 说明 0x00 nop 无操作 0x01 aconst_null 将null推送至栈顶 0x02 iconst_m1 将int型-1推送至栈顶 0x03 iconst_0 将int型0推送至栈顶 0x04 iconst_1 将int型1</description>
     </item>
     
     <item>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>软件工程 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</link>
+    <description>Recent content in 软件工程 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 02 Sep 2022 10:09:53 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Uml</title>
+      <link>https://cherubr.github.io/post/tools/uml/</link>
+      <pubDate>Fri, 02 Sep 2022 10:09:53 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/tools/uml/</guid>
+      <description>UML 软件工程领域中的一种通用、开发性建模语言，旨在提供一种可视化系统设计的标准方法 建模（Modeling） 类图 建模 区分 UML 模型和系统图集是很重要</description>
+    </item>
+    
+  </channel>
+</rss>
