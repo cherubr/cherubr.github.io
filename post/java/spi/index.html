@@ -149,15 +149,14 @@
       <ul>
         <li><a href="#service服务">Service(服务)</a></li>
         <li><a href="#service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</a></li>
-        <li><a href="#service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</a></li>
+        <li><a href="#service-provider-服务提供者实现这个服务的具体模块或者类的厂商或框架实现者">Service Provider （服务提供者（实现这个服务的具体模块或者类的厂商或框架实现者））</a></li>
         <li><a href="#serviceloader">ServiceLoader</a></li>
       </ul>
     </li>
     <li><a href="#api和spi区别">API和SPI区别</a></li>
     <li><a href="#java-生态系统中的-spi-示例">Java 生态系统中的 SPI 示例</a></li>
     <li><a href="#spi实战演练">SPI实战演练</a></li>
-    <li><a href="#spi_serverproviderpngassertspi_serverproviderpng">到这里用户的服务提供者完成。
-<img src="../assert/SPI_serverProvider.png" alt="SPI_serverProvider.png"></a></li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
     </div>
@@ -222,16 +221,18 @@
 <li>SPI组件构成</li>
 <li>API和SPI区别</li>
 <li>SPI实战演练</li>
+<li>总结</li>
 </ul>
 <h2 id="什么是java-spi">什么是java Spi</h2>
-<p><strong>SPI</strong>: 用于发现和加载与给定<strong>接口</strong>匹配的<strong>实现</strong>。服务提供者接口:（供服务的提供者或者框架扩展者去实现服务的一套接口标准）</p>
+<p><strong>SPI</strong>: 用于发现和加载与给定<strong>接口</strong>匹配的<strong>实现</strong>。服务提供者接口:（供服务的提供者或者框架扩展者去实现服务的一套接口标准）
+如日志框架提供了数据库驱动的接口定义，各个厂商对改接口进行对应实现。</p>
 <h2 id="spi组件构成">SPI组件构成</h2>
 <h3 id="service服务">Service(服务)</h3>
 <p>一组众所周知的编程接口和类，它们提供对某些特定应用程序功能或特性的访问。</p>
 <h3 id="service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</h3>
 <p>为了实现特定应用功能的接入，制定的一套标准化的接口，被用于服务提供者去实现该接口，完成对功能的实现。
 一般为具体的sdk服务厂家提供的接口标准。（jdk 为 oracle 驱动提供的接口）</p>
-<h3 id="service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</h3>
+<h3 id="service-provider-服务提供者实现这个服务的具体模块或者类的厂商或框架实现者">Service Provider （服务提供者（实现这个服务的具体模块或者类的厂商或框架实现者））</h3>
 <p>实现提供者接口的具体实现。通过配置 META-INF/services下的文件来确定服务器提供者接口和服务提供者实现。</p>
 <h3 id="serviceloader">ServiceLoader</h3>
 <p>SPI 的核心是 ServiceLoader 类。具有延迟发现和加载实现的作用。
@@ -308,7 +309,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>然后我们创建服务提供者用于制定创建那种日志输出</li>
+<li>然后我们创建服务提供者用于制定创建哪种（如 logback）日志输出 <strong>（服务提供者接口SPI）</strong></li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -336,12 +337,12 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @author Sumin.G
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @title: Logger
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @projectName java-base
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @description: SPI 接口提供者 用于服务提供者去实现该接口，完成对功能的实现
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @description: SPI 接口提供者接口 用于服务提供者去实现该接口，完成对功能的实现
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @date 2022/9/69:40
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> */</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">interface</span> <span style="color:#458;font-weight:bold">LoggerProvider</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * 创建日志管理类
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * 创建日志类别管理类
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * @return
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     */</span>
 </span></span><span style="display:flex;"><span>    Logger <span style="color:#900;font-weight:bold">create</span><span style="color:#000;font-weight:bold">();</span>
@@ -349,7 +350,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>最后是我们的serviceloader类加载对应接口</li>
+<li>最后是我们的serviceloader类加载对应接口（通过加载服务提供者实现的接口类下META—INFO/services/**）文件下的内容
+去实现类的加载。</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -431,15 +433,19 @@
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="spi_serverproviderpngassertspi_serverproviderpng">到这里用户的服务提供者完成。
+</div><ul>
+<li>
+<p>到这里用户的服务提供者完成。
 
         <img class="mx-auto" alt="SPI_serverProvider.png" src="../assert/SPI_serverProvider.png" />   
-    </h2>
-<ul>
-<li>下面我们创建服务提供者实现
+    </p>
+</li>
+<li>
+<p>下面我们创建服务提供者实现
 创建一个名为service-provider的 Maven 项目，并将 service-provider-interface 依赖项添加到pom.xml
 创建<strong>SPI</strong>实现类
-用于构建对应Logger 日志具体实现类</li>
+用于构建对应Logger 日志具体实现类（实现服务提供者提供的服务接口）</p>
+</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -592,7 +598,10 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>输出结果: logback输出日志 <span style="color:#099">123</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><h2 id="总结">总结</h2>
+<p>总的来说，SPI本质上来说其实就是服务的调用者提供了对某一模块功能的接口约定，而服务实现者需要根据这一接口约定进行具体模块功能的开发。
+服务调用者通过SPI中的ServiceLoader提供的方法加载通过对应配置文件配置的内容来实现类的加载，初始化。</p>
+
         </div>
 
         
