@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java基础 on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/java%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in java基础 on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 22 Feb 2020 13:05:19 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/javabase/</link>
+      <pubDate>Sat, 22 Feb 2020 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/javabase/</guid>
+      <description>java面试基础题 深拷贝和浅拷贝区别了解吗？什么是引用拷贝 泛型 1.深拷贝和浅拷贝区别了解吗？什么是引用拷贝？ 浅拷贝: 浅拷贝会在堆上创建一个新</description>
+    </item>
+    
+  </channel>
+</rss>

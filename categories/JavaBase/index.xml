@@ -6,7 +6,16 @@
     <description>Recent content in JavaBase on 朝花夕拾的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 30 Dec 2019 22:31:34 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/JavaBase/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Feb 2020 13:05:19 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/categories/JavaBase/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/javabase/</link>
+      <pubDate>Sat, 22 Feb 2020 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/javabase/</guid>
+      <description>java面试基础题 深拷贝和浅拷贝区别了解吗？什么是引用拷贝 泛型 1.深拷贝和浅拷贝区别了解吗？什么是引用拷贝？ 浅拷贝: 浅拷贝会在堆上创建一个新</description>
+    </item>
+    
     <item>
       <title>JvmMemory</title>
       <link>https://cherubr.github.io/post/java/jvmMemory/</link>

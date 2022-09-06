@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>java 虚拟机 | 朝花夕拾的博客</title>
+    <meta property="og:title" content="java 虚拟机 - 朝花夕拾的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-02-22T13:05:19&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-02-22T13:05:19&#43;08:00'>
+        
+    <meta name="Keywords" content="java,jvm,博客,spring,web3.0,海康视频插件,docker配置mysql,nginx,redis环境,frp远程桌面，frp配置远程桌面">
+    <meta name="description" content="java 虚拟机">
+        
+    <meta name="author" content="cherubr">
+    <meta property="og:url" content="https://cherubr.github.io/post/java/javabase/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script data-ad-client="ca-pub-4031353640611810" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://cherubr.github.io/">
+                        朝花夕拾的博客
+                    </a>
+                
+                <p class="description">专注于Java、spring、移动互联网、项目管理、软件架构</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://cherubr.github.io/">首页</a>
+                    
+                    <a  href="https://cherubr.github.io/tools/" title="工具">工具</a>
+                    
+                    <a  href="https://cherubr.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://cherubr.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1深拷贝和浅拷贝区别了解吗什么是引用拷贝">1.深拷贝和浅拷贝区别了解吗？什么是引用拷贝？</a></li>
+    <li><a href="#泛型">泛型</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if (leftPos < 220) {
+                postToc.css({ "width": leftPos - 10, "margin-left": (0 - leftPos) })
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+
+        if ($("#TableOfContents").children().length < 1) {
+            $(".post-toc").remove();
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">java 虚拟机</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年2月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/JavaBase'>JavaBase</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h1 id="java面试基础题">java面试基础题</h1>
+<ul>
+<li>深拷贝和浅拷贝区别了解吗？什么是引用拷贝</li>
+<li>泛型</li>
+</ul>
+<h2 id="1深拷贝和浅拷贝区别了解吗什么是引用拷贝">1.深拷贝和浅拷贝区别了解吗？什么是引用拷贝？</h2>
+<ul>
+<li><strong>浅拷贝</strong>: 浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</li>
+<li><strong>深拷贝</strong>: 深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。<br>
+<strong>浅拷贝</strong><br>
+实例代码如下:
+clone() 方法的实现很简单，直接调用的是父类 Object 的 clone() 方法</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Address</span> <span style="color:#000;font-weight:bold">implements</span> Cloneable<span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">private</span> String name<span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// 省略构造函数、Getter&amp;Setter方法
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#3c5d5d;font-weight:bold">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">public</span> Address <span style="color:#900;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">try</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">(</span>Address<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">super</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">clone</span><span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">catch</span> <span style="color:#000;font-weight:bold">(</span>CloneNotSupportedException e<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">throw</span> <span style="color:#000;font-weight:bold">new</span> AssertionError<span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Person</span> <span style="color:#000;font-weight:bold">implements</span> Cloneable <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">private</span> Address address<span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// 省略构造函数、Getter&amp;Setter方法
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#3c5d5d;font-weight:bold">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">public</span> Person <span style="color:#900;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">try</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                Person person <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span>Person<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">super</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">clone</span><span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">return</span> person<span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">catch</span> <span style="color:#000;font-weight:bold">(</span>CloneNotSupportedException e<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000;font-weight:bold">throw</span> <span style="color:#000;font-weight:bold">new</span> AssertionError<span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>测试</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>        Person <span style="color:#008080">person1</span> <span style="color:#000;font-weight:bold">=</span> new Person<span style="color:#000;font-weight:bold">(</span>new Address<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;武汉&#34;</span><span style="color:#000;font-weight:bold">))</span>;
+</span></span><span style="display:flex;"><span>        Person <span style="color:#008080">person1Copy</span> <span style="color:#000;font-weight:bold">=</span> person1.clone<span style="color:#000;font-weight:bold">()</span>;
+</span></span><span style="display:flex;"><span>        // <span style="color:#0086b3">true</span>
+</span></span><span style="display:flex;"><span>        System.out.println<span style="color:#000;font-weight:bold">(</span>person1.getAddress<span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">==</span> person1Copy.getAddress<span style="color:#000;font-weight:bold">())</span>;    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从输出结构就可以看出， person1 的克隆对象和 person1 使用的仍然是同一个 Address 对象。<br>
+<strong>深拷贝</strong>
+这里我们简单对 Person 类的 clone() 方法进行修改，连带着要把 Person 对象内部的 Address 对象一起复制</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Person</span> <span style="color:#000;font-weight:bold">implements</span> Cloneable <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">private</span> Address address<span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">// 省略构造函数、Getter&amp;Setter方法
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#3c5d5d;font-weight:bold">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">public</span> Person <span style="color:#900;font-weight:bold">clone</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">try</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            Person person <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">(</span>Person<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">super</span><span style="color:#000;font-weight:bold">.</span><span style="color:#008080">clone</span><span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>            person<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">setAddress</span><span style="color:#000;font-weight:bold">(</span>person<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">getAddress</span><span style="color:#000;font-weight:bold">().</span><span style="color:#008080">clone</span><span style="color:#000;font-weight:bold">());</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span> person<span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span> <span style="color:#000;font-weight:bold">catch</span> <span style="color:#000;font-weight:bold">(</span>CloneNotSupportedException e<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">throw</span> <span style="color:#000;font-weight:bold">new</span> AssertionError<span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>测试 ：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    Person <span style="color:#008080">person1</span> <span style="color:#000;font-weight:bold">=</span> new Person<span style="color:#000;font-weight:bold">(</span>new Address<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;武汉&#34;</span><span style="color:#000;font-weight:bold">))</span>;
+</span></span><span style="display:flex;"><span>    Person <span style="color:#008080">person1Copy</span> <span style="color:#000;font-weight:bold">=</span> person1.clone<span style="color:#000;font-weight:bold">()</span>;
+</span></span><span style="display:flex;"><span>    // <span style="color:#0086b3">false</span>
+</span></span><span style="display:flex;"><span>    System.out.println<span style="color:#000;font-weight:bold">(</span>person1.getAddress<span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">==</span> person1Copy.getAddress<span style="color:#000;font-weight:bold">())</span>;
+</span></span><span style="display:flex;"><span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从输出结构就可以看出，虽然 person1 的克隆对象和 person1 包含的 Address 对象已经是不同的了
+<strong>拷贝示意图</strong>
+
+        <img class="mx-auto" alt="cloneable" src="../assert/cloneable.png" />   
+    </p>
+<h2 id="泛型">泛型</h2>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://cherubr.github.io/">cherubr</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://cherubr.github.io/post/java/javabase/">https://cherubr.github.io/post/java/javabase/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/file/hugo/">Ftp</a></li>
+        
+        <li><a href="/post/mastsc/hugo/">Frc</a></li>
+        
+        <li><a href="/post/java/jvmMemory/">JvmMemory</a></li>
+        
+        <li><a href="/post/sdk/hugo/">Hk videos</a></li>
+        
+        <li><a href="/archives/"></a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/java%E5%9F%BA%E7%A1%80'>java基础</a></li>
+                
+                <li><a href='/tags/java%E9%9D%A2%E8%AF%95'>java面试</a></li>
+                
+                <li><a href='/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D'>深拷贝,浅拷贝</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "cherubr/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+    
+    
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="https://cherubr.github.io/">朝花夕拾的博客 By cherubr</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://cherubr.github.io/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">cherubr</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://cherubr.github.io/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://cherubr.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://cherubr.github.io/post/tools/git/" title="Git">Git</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/tools/hugo/" title="Atom">Atom</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/storage/hugo/" title="RabbitMq">RabbitMq</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/tools/hugo/" title="Maven">Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/frame/hugo/" title="spring 生命周期">spring 生命周期</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/javabase/" title="java 虚拟机">java 虚拟机</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/file/hugo/" title="Ftp">Ftp</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/mastsc/hugo/" title="Frc">Frc</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/java/jvmMemory/" title="JvmMemory">JvmMemory</a>
+    </li>
+    
+    <li>
+        <a href="https://cherubr.github.io/post/sdk/hugo/" title="Hk videos">Hk videos</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://cherubr.github.io/categories/Docker/">Docker (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/JS-Web-Interface/">JS Web Interface (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/Java-Tools/">Java Tools (2)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/JavaBase/">JavaBase (3)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/SpringSpringBootSpring-Cloud/">Spring,SpringBoot,Spring Cloud (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/Tools-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">Tools 安装配置 (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器 (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">消息中间件 (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/">版本控制工具 (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E8%AE%A1%E7%AE%97/">进制转换计算 (1)</a></li>
+    
+    <li><a href="https://cherubr.github.io/categories/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/">远程桌面 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://cherubr.github.io/tags/Apache-Maven/">Apache Maven</a>
+    
+    <a href="https://cherubr.github.io/tags/Git-Submodule/">Git Submodule</a>
+    
+    <a href="https://cherubr.github.io/tags/Git-%E5%AD%90%E6%A8%A1%E5%9D%97/">Git 子模块</a>
+    
+    <a href="https://cherubr.github.io/tags/Git%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/">Git常见命令</a>
+    
+    <a href="https://cherubr.github.io/tags/J2SE/">J2SE</a>
+    
+    <a href="https://cherubr.github.io/tags/JDK/">JDK</a>
+    
+    <a href="https://cherubr.github.io/tags/JRE/">JRE</a>
+    
+    <a href="https://cherubr.github.io/tags/JS-for%E5%BE%AA%E7%8E%AF%E9%97%AD%E5%8C%85%E9%97%AE%E9%A2%98/">JS for循环闭包问题</a>
+    
+    <a href="https://cherubr.github.io/tags/JavaBase/">JavaBase</a>
+    
+    <a href="https://cherubr.github.io/tags/Java%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Java内存结构</a>
+    
+    <a href="https://cherubr.github.io/tags/RabbitMq-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">“RabbitMq 基础学习</a>
+    
+    <a href="https://cherubr.github.io/tags/Spring-%E5%AD%A6%E4%B9%A0%E7%90%86%E8%A7%A3/">Spring 学习理解</a>
+    
+    <a href="https://cherubr.github.io/tags/Spring%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Spring生命周期</a>
+    
+    <a href="https://cherubr.github.io/tags/exchange/">exchange</a>
+    
+    <a href="https://cherubr.github.io/tags/frp/">frp</a>
+    
+    <a href="https://cherubr.github.io/tags/frs/">frs</a>
+    
+    <a href="https://cherubr.github.io/tags/ftp-server/">ftp-server</a>
+    
+    <a href="https://cherubr.github.io/tags/ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">ftp文件上传与下载</a>
+    
+    <a href="https://cherubr.github.io/tags/ftp%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%96%B9%E5%BC%8F/">ftp文件传输方式</a>
+    
+    <a href="https://cherubr.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://cherubr.github.io/tags/hugo-server/">hugo server</a>
+    
+    <a href="https://cherubr.github.io/tags/hugo%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">hugo环境变量配置</a>
+    
+    <a href="https://cherubr.github.io/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>
+    
+    <a href="https://cherubr.github.io/tags/java%E9%9D%A2%E8%AF%95/">java面试</a>
+    
+    <a href="https://cherubr.github.io/tags/jdkmaven-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">jdk，maven 环境配置</a>
+    
+    <a href="https://cherubr.github.io/tags/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">jvm内存结构</a>
+    
+    <a href="https://cherubr.github.io/tags/maven-pom-%E6%96%87%E4%BB%B6%E8%AE%BE%E7%BD%AE%E5%80%BC/">maven pom 文件设置值</a>
+    
+    <a href="https://cherubr.github.io/tags/maven-%E9%85%8D%E7%BD%AE/">maven 配置</a>
+    
+    <a href="https://cherubr.github.io/tags/maven%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE/">maven仓库配置</a>
+    
+    <a href="https://cherubr.github.io/tags/mvn/">mvn</a>
+    
+    <a href="https://cherubr.github.io/tags/nginxmysqlredis%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">nginx，mysql,redis环境配置</a>
+    
+    <a href="https://cherubr.github.io/tags/queue%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">queue配置教程”</a>
+    
+    <a href="https://cherubr.github.io/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E8%BF%9B%E5%88%B6/">二进制转十进制</a>
+    
+    <a href="https://cherubr.github.io/tags/%E6%B5%B7%E5%BA%B7web3.0/">海康web3.0</a>
+    
+    <a href="https://cherubr.github.io/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D/">深拷贝,浅拷贝</a>
+    
+    <a href="https://cherubr.github.io/tags/%E8%A7%86%E9%A2%91%E6%8E%A5%E5%8F%A3/">视频接口</a>
+    
+    <a href="https://cherubr.github.io/tags/%E9%98%BF%E9%87%8C%E4%BA%91%E9%85%8D%E7%BD%AEfrp/">阿里云配置frp</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/cherubr/" title="朝花夕拾的Github">朝花夕拾的Github</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://book.douban.com/subject/2130190/" title="Java权威指南">Java编程思想</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://91mjw.com/" title="消遣时间">我的最爱(美剧)</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://cherubr.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

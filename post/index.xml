@@ -53,6 +53,15 @@
     </item>
     
     <item>
+      <title>java 虚拟机</title>
+      <link>https://cherubr.github.io/post/java/javabase/</link>
+      <pubDate>Sat, 22 Feb 2020 13:05:19 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/javabase/</guid>
+      <description>java面试基础题 深拷贝和浅拷贝区别了解吗？什么是引用拷贝 泛型 1.深拷贝和浅拷贝区别了解吗？什么是引用拷贝？ 浅拷贝: 浅拷贝会在堆上创建一个新</description>
+    </item>
+    
+    <item>
       <title>Ftp</title>
       <link>https://cherubr.github.io/post/file/hugo/</link>
       <pubDate>Wed, 22 Jan 2020 01:28:24 +0800</pubDate>
