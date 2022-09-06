@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java SPI on 朝花夕拾的博客</title>
+    <link>https://cherubr.github.io/tags/Java-SPI/</link>
+    <description>Recent content in Java SPI on 朝花夕拾的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 06 Sep 2021 13:43:18 +0800</lastBuildDate><atom:link href="https://cherubr.github.io/tags/Java-SPI/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SPI组件</title>
+      <link>https://cherubr.github.io/post/java/spi/</link>
+      <pubDate>Mon, 06 Sep 2021 13:43:18 +0800</pubDate>
+      
+      <guid>https://cherubr.github.io/post/java/spi/</guid>
+      <description>Java 服务提供者接口 什么是java Spi SPI组件构成 API和SPI区别 SPI实战演练 什么是java Spi SPI: 用于发现和加载与给定接口匹配的实现。服务提供</description>
+    </item>
+    
+  </channel>
+</rss>
