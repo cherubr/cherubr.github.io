@@ -139,7 +139,8 @@
         }
     }
 </style>
-<div class="post-toc" style="position: absolute; top: 188px;">
+<div class="post-toc" style="position: absolute; top: 188px;" onmousemove="changeDiv()"
+     onmouseout="resetDiv()">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
         <nav id="TableOfContents">
@@ -147,10 +148,10 @@
     <li><a href="#什么是java-spi">什么是java Spi</a></li>
     <li><a href="#spi组件构成">SPI组件构成</a>
       <ul>
+        <li><a href="#serviceloader">ServiceLoader</a></li>
         <li><a href="#service服务">Service(服务)</a></li>
         <li><a href="#service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</a></li>
         <li><a href="#service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</a></li>
-        <li><a href="#serviceloader">ServiceLoader</a></li>
       </ul>
     </li>
     <li><a href="#api和spi区别">API和SPI区别</a></li>
@@ -163,11 +164,13 @@
     </div>
 </div>
 <script type="text/javascript">
+    let width = 'auto';
     $(document).ready(function () {
         var postToc = $(".post-toc");
         if (postToc.length) {
             var leftPos = $("#main").offset().left;
             if (leftPos < 220) {
+                width = leftPos-10;
                 postToc.css({ "width": leftPos - 10, "margin-left": (0 - leftPos) })
             }
 
@@ -192,6 +195,20 @@
             $(".post-toc").remove();
         }
     })
+    function changeDiv(){
+        var postToc = $(".post-toc");
+        var leftPos = $("#main").offset().left;
+        if (leftPos < 220) {
+            postToc.css('width', 'auto')
+        }
+    }
+    function resetDiv(){
+        var postToc = $(".post-toc");
+        var leftPos = $("#main").offset().left;
+        if (leftPos < 220) {
+            postToc.css('width', width)
+        }
+    }
 </script>
     <article class="post">
         <header>
@@ -226,17 +243,17 @@
 <h2 id="什么是java-spi">什么是java Spi</h2>
 <p><strong>SPI</strong>: 用于发现和加载与给定<strong>接口</strong>匹配的<strong>实现</strong>。服务提供者接口:（供服务的提供者或者框架扩展者去实现服务的一套接口标准）</p>
 <h2 id="spi组件构成">SPI组件构成</h2>
+<h3 id="serviceloader">ServiceLoader</h3>
+<p>SPI 的核心是 ServiceLoader 类。加载服务实现的类。具有延迟发现和加载实现的作用。
+它使用上下文类路径来定位提供者实现并将它们放入内部缓存中即
+通过读取服务提供者配置的META-INF/services下的文件信息获取对应服务提供者接口的实现类。</p>
 <h3 id="service服务">Service(服务)</h3>
-<p>一组众所周知的编程接口和类，它们提供对某些特定应用程序功能或特性的访问。</p>
+<p>一组众所周知的编程接口和类，存在零个、一个或多个服务提供者。它们提供对某些特定应用程序功能或特性的访问。</p>
 <h3 id="service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</h3>
 <p>为了实现特定应用功能的接入，制定的一套标准化的接口，被用于服务提供者去实现该接口，完成对功能的实现。
 一般为具体的sdk服务厂家提供的接口标准。（jdk 为 oracle 驱动提供的接口）</p>
 <h3 id="service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</h3>
 <p>实现提供者接口的具体实现。通过配置 META-INF/services下的文件来确定服务器提供者接口和服务提供者实现。</p>
-<h3 id="serviceloader">ServiceLoader</h3>
-<p>SPI 的核心是 ServiceLoader 类。具有延迟发现和加载实现的作用。
-它使用上下文类路径来定位提供者实现并将它们放入内部缓存中即
-通过读取服务提供者配置的META-INF/services下的文件信息获取对应实现类。</p>
 <h2 id="api和spi区别">API和SPI区别</h2>
 <ul>
 <li>当实现方提供了接口和实现，我们可以通过调用实现方的接口从而拥有实现方给我们提供的能力，这就是 API ，这种接口和实现都是放在实现方的。</li>
