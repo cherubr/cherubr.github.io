@@ -13,7 +13,7 @@
       <pubDate>Mon, 06 Sep 2021 13:43:18 +0800</pubDate>
       
       <guid>https://cherubr.github.io/post/java/spi/</guid>
-      <description>Java 服务提供者接口 什么是java Spi SPI组件构成 API和SPI区别 SPI实战演练 总结 什么是java Spi SPI: 用于发现和加载与给定接口匹配的实现。服务</description>
+      <description>Java 服务提供者接口 什么是java Spi SPI组件构成 API和SPI区别 SPI实战演练 什么是java Spi SPI: 用于发现和加载与给定接口匹配的实现。服务提供</description>
     </item>
     
     <item>
@@ -23,15 +23,6 @@
       
       <guid>https://cherubr.github.io/post/java/jvmcommandlist/</guid>
       <description>javap -c 对代码进行反汇编 指令码 助记符 说明 0x00 nop 无操作 0x01 aconst_null 将null推送至栈顶 0x02 iconst_m1 将int型-1推送至栈顶 0x03 iconst_0 将int型0推送至栈顶 0x04 iconst_1 将int型1</description>
-    </item>
-    
-    <item>
-      <title>java 基础知识点</title>
-      <link>https://cherubr.github.io/post/java/javabase/</link>
-      <pubDate>Sat, 22 Feb 2020 13:05:19 +0800</pubDate>
-      
-      <guid>https://cherubr.github.io/post/java/javabase/</guid>
-      <description>java基础 深拷贝和浅拷贝区别了解吗？什么是引用拷贝 泛型 注解 序列化和反序列化 语法糖 java只有值传递 1.深拷贝和浅拷贝区别了解吗？什么是引用</description>
     </item>
     
     <item>
