@@ -139,7 +139,8 @@
         }
     }
 </style>
-<div class="post-toc" style="position: absolute; top: 188px;">
+<div class="post-toc" style="position: absolute; top: 188px;" onmousemove="changeDiv()"
+     onmouseout="resetDiv()">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
         <nav id="TableOfContents">
@@ -147,26 +148,29 @@
     <li><a href="#什么是java-spi">什么是java Spi</a></li>
     <li><a href="#spi组件构成">SPI组件构成</a>
       <ul>
+        <li><a href="#serviceloader">ServiceLoader</a></li>
         <li><a href="#service服务">Service(服务)</a></li>
         <li><a href="#service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</a></li>
-        <li><a href="#service-provider-服务提供者实现这个服务的具体模块或者类的厂商或框架实现者">Service Provider （服务提供者（实现这个服务的具体模块或者类的厂商或框架实现者））</a></li>
-        <li><a href="#serviceloader">ServiceLoader</a></li>
+        <li><a href="#service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</a></li>
       </ul>
     </li>
     <li><a href="#api和spi区别">API和SPI区别</a></li>
     <li><a href="#java-生态系统中的-spi-示例">Java 生态系统中的 SPI 示例</a></li>
     <li><a href="#spi实战演练">SPI实战演练</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li><a href="#spi_serverproviderpngassertspi_serverproviderpng">到这里用户的服务提供者完成。
+<img src="../assert/SPI_serverProvider.png" alt="SPI_serverProvider.png"></a></li>
   </ul>
 </nav>
     </div>
 </div>
 <script type="text/javascript">
+    let width = 'auto';
     $(document).ready(function () {
         var postToc = $(".post-toc");
         if (postToc.length) {
             var leftPos = $("#main").offset().left;
             if (leftPos < 220) {
+                width = leftPos-10;
                 postToc.css({ "width": leftPos - 10, "margin-left": (0 - leftPos) })
             }
 
@@ -191,6 +195,20 @@
             $(".post-toc").remove();
         }
     })
+    function changeDiv(){
+        var postToc = $(".post-toc");
+        var leftPos = $("#main").offset().left;
+        if (leftPos < 220) {
+            postToc.css('width', 'auto')
+        }
+    }
+    function resetDiv(){
+        var postToc = $(".post-toc");
+        var leftPos = $("#main").offset().left;
+        if (leftPos < 220) {
+            postToc.css('width', width)
+        }
+    }
 </script>
     <article class="post">
         <header>
@@ -203,7 +221,9 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/JavaBase'>JavaBase</a></span>
+            <span class="meta-category">
+                <a href='/categories/JavaBase' target="_blank">JavaBase</a>
+            </span>
             
         </div>
         
@@ -221,23 +241,21 @@
 <li>SPI组件构成</li>
 <li>API和SPI区别</li>
 <li>SPI实战演练</li>
-<li>总结</li>
 </ul>
 <h2 id="什么是java-spi">什么是java Spi</h2>
-<p><strong>SPI</strong>: 用于发现和加载与给定<strong>接口</strong>匹配的<strong>实现</strong>。服务提供者接口:（供服务的提供者或者框架扩展者去实现服务的一套接口标准）
-如日志框架提供了数据库驱动的接口定义，各个厂商对改接口进行对应实现。</p>
+<p><strong>SPI</strong>: 用于发现和加载与给定<strong>接口</strong>匹配的<strong>实现</strong>。服务提供者接口:（供服务的提供者或者框架扩展者去实现服务的一套接口标准）</p>
 <h2 id="spi组件构成">SPI组件构成</h2>
+<h3 id="serviceloader">ServiceLoader</h3>
+<p>SPI 的核心是 ServiceLoader 类。加载服务实现的类。具有延迟发现和加载实现的作用。
+它使用上下文类路径来定位提供者实现并将它们放入内部缓存中即
+通过读取服务提供者配置的META-INF/services下的文件信息获取对应服务提供者接口的实现类。</p>
 <h3 id="service服务">Service(服务)</h3>
-<p>一组众所周知的编程接口和类，它们提供对某些特定应用程序功能或特性的访问。</p>
+<p>一组众所周知的编程接口和类，存在零个、一个或多个服务提供者。它们提供对某些特定应用程序功能或特性的访问。</p>
 <h3 id="service-provider-interface服务提供者接口">Service Provider Interface（服务提供者接口）</h3>
 <p>为了实现特定应用功能的接入，制定的一套标准化的接口，被用于服务提供者去实现该接口，完成对功能的实现。
 一般为具体的sdk服务厂家提供的接口标准。（jdk 为 oracle 驱动提供的接口）</p>
-<h3 id="service-provider-服务提供者实现这个服务的具体模块或者类的厂商或框架实现者">Service Provider （服务提供者（实现这个服务的具体模块或者类的厂商或框架实现者））</h3>
+<h3 id="service-provider-服务提供者实现这个服务的具体模块或者类">Service Provider （服务提供者（实现这个服务的具体模块或者类））</h3>
 <p>实现提供者接口的具体实现。通过配置 META-INF/services下的文件来确定服务器提供者接口和服务提供者实现。</p>
-<h3 id="serviceloader">ServiceLoader</h3>
-<p>SPI 的核心是 ServiceLoader 类。具有延迟发现和加载实现的作用。
-它使用上下文类路径来定位提供者实现并将它们放入内部缓存中即
-通过读取服务提供者配置的META-INF/services下的文件信息获取对应实现类。</p>
 <h2 id="api和spi区别">API和SPI区别</h2>
 <ul>
 <li>当实现方提供了接口和实现，我们可以通过调用实现方的接口从而拥有实现方给我们提供的能力，这就是 API ，这种接口和实现都是放在实现方的。</li>
@@ -249,7 +267,7 @@
 为 Currency 类提供本地化货币符号</li>
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/spi/LocaleNameProvider.html">LocaleNameProvider</a>:
 为 Locale 类提供本地化名称</li>
-<li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/spi/TimeZoneNameProvider.html">TimeZoneNameProvider</a>: 
+<li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/spi/TimeZoneNameProvider.html">TimeZoneNameProvider</a>:
 为 TimeZone 类提供本地化的时区名称</li>
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/spi/DateFormatProvider.html">DateFormatProvider</a>:
 为指定的语言环境提供日期和时间格式。</li>
@@ -309,7 +327,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>然后我们创建服务提供者用于制定创建哪种（如 logback）日志输出 <strong>（服务提供者接口SPI）</strong></li>
+<li>然后我们创建服务提供者用于制定创建那种日志输出</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -337,12 +355,12 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @author Sumin.G
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @title: Logger
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @projectName java-base
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @description: SPI 接口提供者接口 用于服务提供者去实现该接口，完成对功能的实现
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @description: SPI 接口提供者 用于服务提供者去实现该接口，完成对功能的实现
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> * @date 2022/9/69:40
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"> */</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">interface</span> <span style="color:#458;font-weight:bold">LoggerProvider</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * 创建日志类别管理类
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * 创建日志管理类
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     * @return
 </span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">     */</span>
 </span></span><span style="display:flex;"><span>    Logger <span style="color:#900;font-weight:bold">create</span><span style="color:#000;font-weight:bold">();</span>
@@ -350,8 +368,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>最后是我们的serviceloader类加载对应接口（通过加载服务提供者实现的接口类下META—INFO/services/**）文件下的内容
-去实现类的加载。</li>
+<li>最后是我们的serviceloader类加载对应接口</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -433,19 +450,15 @@
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>
-<p>到这里用户的服务提供者完成。
+</div><h2 id="spi_serverproviderpngassertspi_serverproviderpng">到这里用户的服务提供者完成。
 
         <img class="mx-auto" alt="SPI_serverProvider.png" src="../assert/SPI_serverProvider.png" />   
-    </p>
-</li>
-<li>
-<p>下面我们创建服务提供者实现
+    </h2>
+<ul>
+<li>下面我们创建服务提供者实现
 创建一个名为service-provider的 Maven 项目，并将 service-provider-interface 依赖项添加到pom.xml
 创建<strong>SPI</strong>实现类
-用于构建对应Logger 日志具体实现类（实现服务提供者提供的服务接口）</p>
-</li>
+用于构建对应Logger 日志具体实现类</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -598,10 +611,7 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>输出结果: logback输出日志 <span style="color:#099">123</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="总结">总结</h2>
-<p>总的来说，SPI本质上来说其实就是服务的调用者提供了对某一模块功能的接口约定，而服务实现者需要根据这一接口约定进行具体模块功能的开发。
-服务调用者通过SPI中的ServiceLoader提供的方法加载通过对应配置文件配置的内容来实现类的加载，初始化。</p>
-
+</div>
         </div>
 
         
@@ -640,7 +650,7 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/Java-SPI'>Java SPI</a></li>
+                <li><a href='/tags/Java-SPI' target="_blank">Java SPI</a></li>
                 
             </ul>
             
@@ -719,6 +729,82 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+
     <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
@@ -744,43 +830,43 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
 <ul class="widget-list">
     
     <li>
-        <a href="https://cherubr.github.io/post/tools/uml/" title="Uml">Uml</a>
+        <a href="https://cherubr.github.io/post/tools/uml/" title="Uml" target="_blank">Uml</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/tools/git/" title="Git">Git</a>
+        <a href="https://cherubr.github.io/post/tools/git/" title="Git" target="_blank">Git</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/tools/hugo/" title="Atom">Atom</a>
+        <a href="https://cherubr.github.io/post/tools/hugo/" title="Atom" target="_blank">Atom</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/java/spi/" title="SPI组件">SPI组件</a>
+        <a href="https://cherubr.github.io/post/java/spi/" title="SPI组件" target="_blank">SPI组件</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/java/jvmcommandlist/" title="Jvmcommandlist">Jvmcommandlist</a>
+        <a href="https://cherubr.github.io/post/java/jvmcommandlist/" title="Jvmcommandlist" target="_blank">Jvmcommandlist</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/storage/hugo/" title="RabbitMq">RabbitMq</a>
+        <a href="https://cherubr.github.io/post/storage/hugo/" title="RabbitMq" target="_blank">RabbitMq</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/tools/hugo/" title="Maven">Maven</a>
+        <a href="https://cherubr.github.io/post/tools/hugo/" title="Maven" target="_blank">Maven</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/frame/hugo/" title="spring 生命周期">spring 生命周期</a>
+        <a href="https://cherubr.github.io/post/frame/hugo/" title="spring 生命周期" target="_blank">spring 生命周期</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/java/javabase/" title="java 基础知识点">java 基础知识点</a>
+        <a href="https://cherubr.github.io/post/file/hugo/" title="Ftp" target="_blank">Ftp</a>
     </li>
     
     <li>
-        <a href="https://cherubr.github.io/post/file/hugo/" title="Ftp">Ftp</a>
+        <a href="https://cherubr.github.io/post/mastsc/hugo/" title="Frc" target="_blank">Frc</a>
     </li>
     
 </ul>
@@ -798,7 +884,7 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
     
     <li><a href="https://cherubr.github.io/categories/Java-Tools/">Java Tools (2)</a></li>
     
-    <li><a href="https://cherubr.github.io/categories/JavaBase/">JavaBase (5)</a></li>
+    <li><a href="https://cherubr.github.io/categories/JavaBase/">JavaBase (4)</a></li>
     
     <li><a href="https://cherubr.github.io/categories/SpringSpringBootSpring-Cloud/">Spring,SpringBoot,Spring Cloud (1)</a></li>
     
@@ -871,10 +957,6 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
     
     <a href="https://cherubr.github.io/tags/hugo%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">hugo环境变量配置</a>
     
-    <a href="https://cherubr.github.io/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>
-    
-    <a href="https://cherubr.github.io/tags/java%E9%9D%A2%E8%AF%95/">java面试</a>
-    
     <a href="https://cherubr.github.io/tags/jdkmaven-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">jdk，maven 环境配置</a>
     
     <a href="https://cherubr.github.io/tags/jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">jvm内存结构</a>
@@ -896,8 +978,6 @@ META-INF/services/com.ahut.spi.LoggerProvider  &ndash;&gt;文件内容为实现�
     <a href="https://cherubr.github.io/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BD%AC%E5%8D%81%E8%BF%9B%E5%88%B6/">二进制转十进制</a>
     
     <a href="https://cherubr.github.io/tags/%E6%B5%B7%E5%BA%B7web3.0/">海康web3.0</a>
-    
-    <a href="https://cherubr.github.io/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E6%B5%85%E6%8B%B7%E8%B4%9D/">深拷贝,浅拷贝</a>
     
     <a href="https://cherubr.github.io/tags/%E8%A7%86%E9%A2%91%E6%8E%A5%E5%8F%A3/">视频接口</a>
     
